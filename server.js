@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const sunset = 'https://static.rootsrated.com/image/upload/s--dOztdKo4--/t_rr_large_traditional/xeeqiz2egntxuc7u5mce.jpg'
+
 
 app.use(express.static('public'))
 
@@ -27,3 +29,11 @@ app.use(urlLogger, timeLogger);
 app.get('/json', (request, response) => {
   response.status(200).json({"name": "Robbie"});
 });
+
+app.get('/sunsets', (request, response) => {
+  response.send(`<img src=${sunset}>`)
+})
+
+app.use(function (req, res, next) {
+  res.status(404).send("Sorry can't find that!")
+})
